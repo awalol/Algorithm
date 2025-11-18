@@ -1,85 +1,80 @@
 //
 // Created by awalol on 2025/11/17.
 // https://ac.nowcoder.com/acm/contest/98215/F
+// 未通过
 //
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
 
-bool row(string s) {
-    for (int i = 0;i < s.size() - 4;i++) {
-        if (i + 4 > s.size()) {
-            break;
-        }
-        int temp = 0;
-        for (int j = 0;j < 3;j++) {
-            if (s[j] == s[j + 1]) {
-                temp++;
-            }
-        }
-        if (temp == 3) {
-            return true;
-        }
+void win(char c) {
+    switch (c) {
+        case 'r':
+            cout << "kou";
+            exit(0);
+        case 'p':
+            cout << "yukari";
+            exit(0);
     }
-
-    return false;
-}
-
-bool column(vector<string> s) {
-    return false;
 }
 
 int main() {
     // 横 竖 斜对角 有四个旗子则胜利
 
-    // ----n----
+    // ----m----
     // |
     // |
     // |
-    // m
+    // n
     // |
     // |
     // |
 
-    int n,m;
+    int n, m;
     cin >> n >> m;
     vector<string> s(n);
-    for (int i = 0;i < n;i++) {
+    unordered_map<char,int> map1;
+    unordered_map<char,int> map2;
+    unordered_map<char,int> map3;
+    unordered_map<char,int> map4;
+    for (int i = 0; i < n; i++) {
         cin >> s[i];
-    }
-
-    // for (int i = 0;i < m - 4;i++) {
-    //     int count = 0;
-    //     for (int j = i;j < 3;j++) {
-    //         if (s[j])
-    //     }
-    // }
-
-    /*for (int k = 0;k < m - 4;k++) {
-        for (int i = 0;i < m - n;i++) {
-            char initChar = s[k][i];
-            if (initChar == '.') {
-                continue;
+        map2.clear();
+        for (int j = 0;j < m;j++) {
+            map2[s[i][j]]++;
+            if (map2[s[i][j]] == 4) {
+                win(s[i][j]);
             }
-            int temp = 0;
-            for (int j = 1;j < i + 4;j++) {
-                if (s[j][j + i] == initChar) {
-                    temp++;
+            if (i >= 1) {
+                if (s[i][j] == s[i - 1][j]) {
+                    map1[s[i][j]]++;
                 }
-            }
-            if (temp == 4) {
-                switch (initChar) {
-                    case 'r':
-                        cout << "kou";
-                        return 0;
-                    case 'p':
-                        cout << "yukari";
-                        return 0;
+                if (map1[s[i][j]] == 4) {
+                    win(s[i][j]);
+                }
+                if (j >= 1) {
+                    if (s[i][j] == s[i - 1][j - 1]) {
+                        map3[s[i][j]]++;
+                    }
+                    if (map3[s[i][j]] == 3) {
+                        win(s[i][j]);
+                    }
                 }
             }
         }
-    }*/
+        for (int j = m - 1;j >= 0;j++) {
+            if (i >= 1) {
+                if (s[i][j] == s[i - 1][j + 1]) {
+                    map4[s[i][j]]++;
+                }
+                if (map4[s[i][j]] == 3) {
+                    win(s[i][j]);
+                }
+            }
+        }
+    }
 
     return 0;
 }
