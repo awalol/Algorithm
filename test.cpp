@@ -1,16 +1,8 @@
-#include <iostream>
-#include <unordered_map>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(){
-    unordered_map<char,int> map;
-    map['r']++;
-    map['p']++;
-    if (map['r'] == 1) {
-        cout << "test" << endl;
-    }
-    cout << map['p'] << endl;
+    cout << __gcd(3,2) << endl;
 
     return 0;
 }
