@@ -2,7 +2,8 @@
 using namespace std;
 
 int main(){
-    cout << __gcd(3,2) << endl;
+    int a[6] = {0};
+    cout << a[-1] << endl;
 
     return 0;
 }
